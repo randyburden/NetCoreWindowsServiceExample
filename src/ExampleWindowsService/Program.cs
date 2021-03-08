@@ -32,7 +32,6 @@ namespace ExampleWindowsService
             var builder = WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, config) =>
                 {
-                    context.HostingEnvironment.EnvironmentName = ApplicationName;
                 })
                 .ConfigureLogging(logging =>
                 {
@@ -70,7 +69,7 @@ namespace ExampleWindowsService
                 LogManager.GetCurrentClassLogger().Info("Application starting");
                 builder.Build().Run();
                 // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
-                NLog.LogManager.Shutdown();
+                LogManager.Shutdown();
             }
         }
     }
